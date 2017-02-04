@@ -1,8 +1,11 @@
+* {
+  user-select: none;
+}
+
 .drag {
   opacity: 0.9;
   position: absolute;
   text-align: center;
-  user-select: none;
 }
 
 .drag:hover {

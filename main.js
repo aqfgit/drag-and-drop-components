@@ -166,6 +166,7 @@ Board.update = function update() {
       item.y = Board.mousePos.y - (item.dragPoint.y) + item.stationaryPosition.y;
       item.x = Board.mousePos.x - (item.dragPoint.x) + item.stationaryPosition.x;
     }
+
     else if ((item.resizableX || item.resizableY) && item.mousedown && Board.isCursorMoving) {
       item.isBeingResized = true;
       if (item.resizableX) {
@@ -175,7 +176,7 @@ Board.update = function update() {
             break;
           case 'left':
             item.width = item.dragPoint.x - Board.mousePos.x + item.stationaryWidth;
-            if (item.width > 1) item.x = Board.mousePos.x
+            if (item.width > 5) item.x = Board.mousePos.x
             break;
         }
       }
@@ -187,20 +188,19 @@ Board.update = function update() {
             break;
           case 'top':
             item.height = item.dragPoint.y - Board.mousePos.y + item.stationaryHeight;
-            if (item.height > 1) item.y = Board.mousePos.y;
+            if (item.height > 5) item.y = Board.mousePos.y;
             break;
         }
       }
     }
  
-    if (item.width <= 0) item.width = 1;
-    if (item.height <= 0) item.height = 1;
+    if (item.width <= 0) item.width = 5;
+    if (item.height <= 0) item.height = 5;
 
     item.element.style.left = item.x + 'px'; 
     item.element.style.top = item.y + 'px';
     item.element.style.width = item.width + 'px';
     item.element.style.height = item.height + 'px';
-    
   }
 }
 
@@ -223,6 +223,9 @@ createObjectButton.addEventListener('click', function(event) {
 
   if (size < 20 || size > 300) {
     alert("Element's size must fall between 20 and 300");
+    return;
+  } else if (isNaN(parseFloat(size)) || !isFinite(size)) {
+    alert('Size should be a number!');
     return;
   }
   const element = new DomElement({
