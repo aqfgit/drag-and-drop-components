@@ -10,22 +10,33 @@
   <div class="form-wrap">
     <h1>Add a new object</h1>
     <form>
-      <label for="color">Color</label>
-      <select id="color-picker" name="color">
-        <option value="red" value="value1">Red</option> 
-        <option value="green" value="value1">Green</option>
-        <option value="blue" value="value1">Blue</option>
-        <option value="orange" value="value1">Orange</option>
-        <option value="pink" value="value1">Pink</option>
-        <option value="cyan" value="value1">Cyan</option>
-        <option value="black" value="value1">Black</option>
-        <option value="Purple" value="value1">Purple</option>
-      </select>
-      <label for="shape">Circle</label>
-      <input id="shape-input" type="checkbox" name="shape" value="circle">
-      <label for="size">Size</label>
-      <input id="size-input" type="text" name="size" placeholder="20 to 300">
-      <button id="create-element" name="submit" type="button">Create</button>
+
+      <div class="input-wrap">
+        <label for="color">Color</label>
+        <select id="color-picker" name="color">
+          <option value="red" value="value1">Red</option> 
+          <option value="green" value="value1">Green</option>
+          <option value="blue" value="value1">Blue</option>
+          <option value="orange" value="value1">Orange</option>
+          <option value="pink" value="value1">Pink</option>
+          <option value="cyan" value="value1">Cyan</option>
+          <option value="black" value="value1">Black</option>
+          <option value="Purple" value="value1">Purple</option>
+        </select>
+      </div>
+      
+      <div class="input-wrap">
+        <label for="shape">Circle</label>
+        <input id="shape-input" type="checkbox" name="shape" value="circle">
+      </div>
+
+      <div class="input-wrap">
+        <label for="size">Size</label>
+        <input id="size-input" type="text" name="size" placeholder="20 to 300">
+      </div>
+      <div class="input-wrap">
+        <button class="btn" id="create-element" name="submit" type="button">Create</button>
+      </div>
     </form>
   </div>
   <script src="main.js">
