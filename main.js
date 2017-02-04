@@ -10,7 +10,9 @@ function DomElement(options) {
   styles.width = options.width + 'px';
   styles.height = options.height + 'px';
   styles.backgroundColor = options.backgroundColor;
-
+  if (options.shape === 'circle') {
+    styles.borderRadius = '50%';
+  }
   document.body.appendChild(el);
 
   return el;
@@ -207,6 +209,7 @@ Board.update = function update() {
 const colorPicker = document.getElementById('color-picker');
 const sizeInput = document.getElementById('size-input');
 const createObjectButton = document.getElementById('create-element');
+const shapeInput = document.getElementById('shape-input');
 
 window.addEventListener('mousemove', function(event) {
   clearTimeout(Board.checkIfCursorIsMoving);
@@ -220,7 +223,8 @@ window.addEventListener('mousemove', function(event) {
 
 createObjectButton.addEventListener('click', function(event) {
   const size = sizeInput.value;
-
+  let shape = 'square';
+  if (shapeInput.checked) shape = shapeInput.value;
   if (size < 20 || size > 300) {
     alert("Element's size must fall between 20 and 300");
     return;
@@ -233,7 +237,8 @@ createObjectButton.addEventListener('click', function(event) {
     y: Math.random() * ((window.innerHeight - 100) - 200) + 200,
     width: size,
     height: size,
-    backgroundColor: colorPicker.options[colorPicker.selectedIndex].value
+    backgroundColor: colorPicker.options[colorPicker.selectedIndex].value,
+    shape: shape
   });
 
   Board.addElement(element);
