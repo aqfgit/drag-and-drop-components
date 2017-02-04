@@ -1,11 +1,10 @@
 .drag {
   opacity: 0.9;
   position: absolute;
-  border-radius: 50%;
   text-align: center;
   user-select: none;
 }
 
 .drag:hover {
-  cursor: pointer;
+  cursor: -webkit-grab;
 }

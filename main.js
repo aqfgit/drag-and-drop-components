@@ -45,12 +45,33 @@ Board.elementOnMouseDown = function elementOnMouseDown(event, el) {
   el.x = Board.mousePos.x;
   el.dragPoint.x = Board.mousePos.x;
   el.dragPoint.y = Board.mousePos.y;
+  el.element.style.cursor = '-webkit-grabbing';
+}
+
+Board.elementOnMouseMove = function elementOnMouseMove(event, el) {
+  const isCursorOnTheLeftEdge = (Board.mousePos.x >= el.x - 5) && (Board.mousePos.x <= el.x + 5);
+  const isCursorOnTheRightEdge = (Board.mousePos.x <= el.x + el.width + 5) && (Board.mousePos.x >= el.x + el.width - 5);
+  const isCursorOnTheTopEdge = (Board.mousePos.y >= el.y - 5) && (Board.mousePos.y <= el.y + 5);
+const isCursorOnTheBottomEdge = (Board.mousePos.y <= el.y + el.height + 5) && (Board.mousePos.y >= el.y + el.height - 5);
+
+  if (isCursorOnTheLeftEdge){
+    el.element.style.cursor = 'ew-resize';
+  } else if (isCursorOnTheRightEdge) {
+    el.element.style.cursor = 'ew-resize';
+  } else if (isCursorOnTheTopEdge) {
+    el.element.style.cursor = 'ns-resize';
+  } else if(isCursorOnTheBottomEdge) {
+    el.element.style.cursor = 'ns-resize';
+  } else {
+    el.element.style.cursor = '-webkit-grab';
+  }
 }
 
 Board.windowOnMouseUp = function windowOnMouseUp(event, el) {
   if(el.selected === true) {
     el.y = Board.mousePos.y - (el.dragPoint.y) + el.stationaryPosition.y;
     el.x = Board.mousePos.x - (el.dragPoint.x) + el.stationaryPosition.x;
+    el.element.style.cursor = '-webkit-grab';
   }
   el.selected = false;
   Board.mousedown = false;
@@ -68,11 +89,13 @@ Board.windowOnMouseDown = function elementOnMouseDown(event, el) {
 
 Board.updateListeners = function updateListeners() {
   for(let item of Board.elements) {
-    item.element.removeEventListener('mousedown', () => Board.elementOnMouseDown(event, item))
+    item.element.removeEventListener('mousemove', () => Board.elementOnMouseMove(event, item));
+    item.element.removeEventListener('mousedown', () => Board.elementOnMouseDown(event, item));
     window.removeEventListener('mouseup', () => Board.windowOnMouseUp(event, item));
     window.removeEventListener('mousedown', () => Board.windowOnMouseDown(event, item));
 
-    item.element.addEventListener('mousedown', () => Board.elementOnMouseDown(event, item))
+    item.element.addEventListener('mousemove', () => Board.elementOnMouseMove(event, item));
+    item.element.addEventListener('mousedown', () => Board.elementOnMouseDown(event, item));
     window.addEventListener('mouseup', () => Board.windowOnMouseUp(event, item));
     window.addEventListener('mousedown', () => Board.windowOnMouseDown(event, item));
   }
