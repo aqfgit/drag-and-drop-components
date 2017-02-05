@@ -57,6 +57,7 @@ Board.moveElement = function moveElement(event, el) {
     el.dragPoint.x = Board.mousePos.x;
     el.dragPoint.y = Board.mousePos.y;
     el.element.style.cursor = '-webkit-grabbing';
+    el.element.style.cursor = 'grabbing';
   }
 }
 
@@ -94,6 +95,7 @@ Board.checkIfResizable = function checkIfResizable(event, el) {
     el.draggable = false;
   } else {
     el.element.style.cursor = '-webkit-grab';
+    el.element.style.cursor = 'grab';
     el.draggable = true;
   }
 }
@@ -132,17 +134,17 @@ Board.elementOnMouseDown = function elementOnMouseDown(event, el) {
 
 Board.updateListeners = function updateListeners() {
   for(let item of Board.elements) {
-    item.element.removeEventListener('mousemove', () => Board.checkIfResizable(event, item));
-    item.element.removeEventListener('mousedown', () => Board.moveElement(event, item));
-    window.removeEventListener('mouseup', () => Board.dropElement(event, item));
-    item.element.removeEventListener('mousedown', () => Board.elementOnMouseDown(event, item));
-    item.element.removeEventListener('mousedown', () => Board.elementResize(event, item));
+    item.element.removeEventListener('mousemove', (event) => Board.checkIfResizable(event, item));
+    item.element.removeEventListener('mousedown', (event) => Board.moveElement(event, item));
+    window.removeEventListener('mouseup', (event) => Board.dropElement(event, item));
+    item.element.removeEventListener('mousedown', (event) => Board.elementOnMouseDown(event, item));
+    item.element.removeEventListener('mousedown', (event) => Board.elementResize(event, item));
 
-    item.element.addEventListener('mousemove', () => Board.checkIfResizable(event, item));
-    item.element.addEventListener('mousedown', () => Board.moveElement(event, item));
-    window.addEventListener('mouseup', () => Board.dropElement(event, item));
-    item.element.addEventListener('mousedown', () => Board.elementOnMouseDown(event, item));
-    item.element.addEventListener('mousedown', () => Board.elementResize(event, item));
+    item.element.addEventListener('mousemove', (event) => Board.checkIfResizable(event, item));
+    item.element.addEventListener('mousedown', (event) => Board.moveElement(event, item));
+    window.addEventListener('mouseup', (event) => Board.dropElement(event, item));
+    item.element.addEventListener('mousedown', (event) => Board.elementOnMouseDown(event, item));
+    item.element.addEventListener('mousedown', (event) => Board.elementResize(event, item));
   }
 
 }
