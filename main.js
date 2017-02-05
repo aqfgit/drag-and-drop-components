@@ -113,6 +113,7 @@ Board.dropElement = function dropElement(event, el) {
     el.y = Board.mousePos.y - (el.dragPoint.y) + el.stationaryPosition.y;
     el.x = Board.mousePos.x - (el.dragPoint.x) + el.stationaryPosition.x;
     el.element.style.cursor = '-webkit-grab';
+    el.element.style.cursor = 'grab';
   }
   el.selected = false;
   el.mousedown = false;
